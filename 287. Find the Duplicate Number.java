@@ -1,4 +1,3 @@
-287. Find the Duplicate Number
 class Solution {
     public List<Integer> findDuplicates(int[] nums) {
         List<Integer> res = new ArrayList<Integer>();
