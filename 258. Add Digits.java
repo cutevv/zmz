@@ -4,7 +4,7 @@ class Solution {
     		return num;
     	}
     	
-   		while (num / 10 > 0){ // if the sum in the inner while loop still need to be add up 
+   		while (num >= 10){ // if the sum in the inner while loop still need to be add up again
     		int sum = 0;
     		while (num > 0){	//stop when reacing the most left digit
     			sum += num % 10;
