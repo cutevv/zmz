@@ -10,7 +10,7 @@ class Solution {
         }
         //mutiply from right side and update with the left * right 
         int right = 1;
-        for (int i = n -1; i >= 0; i--){
+        for (int i = n - 1; i >= 0; i--){
             res[i] = right * res[i];
             right = right * nums[i]; 
         }
