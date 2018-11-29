@@ -1,41 +1,30 @@
 class Solution {
-    public List<Integer> topKFrequent(int[] nums, int k) {
-        List<Integer> res = new ArrayList<Integer>();
-        if(nums == null || nums.length == 0 || k == 0){
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(root == null){
             return res;
         }
-        //record all the frequency in the map, and adding into max heap, return the top k ones
-        Map<Integer, Integer> countMap = count(nums); 
-        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(k, new Comparator<Map.Entry<Integer, Integer>>(){
-            public int compare(Map.Entry<Integer, Integer> m1, Map.Entry<Integer, Integer> m2){
-                return m2.getValue().compareTo(m1.getValue());
+        //use a queue to store next level and poll out
+        Deque<TreeNode> dq = new ArrayDeque<TreeNode>();
+        dq.offerLast(root);
+        while(!dq.isEmpty()){
+            List<Integer> curr = new ArrayList<Integer>();
+            int size = dq.size();
+            while(size > 0){
+                TreeNode node = dq.pollFirst();
+                curr.add(node.val);
+                size--;
+                if(node.left != null){
+                    dq.offerLast(node.left);
+                }
+                if(node.right != null){
+                    dq.offerLast(node.right);
+                }
             }
-        });
-        for(Map.Entry<Integer, Integer> entry : countMap.entrySet()){
-                minHeap.offer(entry);
-        }
-        
-        for(int i = 0; i < k; i++){
-            res.add(minHeap.poll().getKey());
+            res.add(curr);
         }
         return res;
-    } 
-        
-    
-    public Map<Integer, Integer> count(int[] nums){
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for(int num : nums){
-            Integer freq = map.get(num);
-            if (freq == null){
-                map.put(num, 1);
-            }
-            else{
-                map.put(num, freq + 1);
-            }
-        }
-        return map;   
     }
 }
-
-//time: O(nlogn)
+//time: O(n)
 //space: O(n)
