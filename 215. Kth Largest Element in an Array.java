@@ -10,8 +10,8 @@ class Solution {
                 minHeap.add(num);
             }
         }
-        
-    return minHeap.poll();
-        
+            return minHeap.poll();         
     }
 }
+//time:O(nlongk)
+//space: O(k)
